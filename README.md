@@ -1,5 +1,4 @@
 # Anudip
-[![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/vijaybarhate/Anudip)
 
 This repository contains a simple command-line interface (CLI) application written in Java that demonstrates fundamental database operations: Create, Read, Update, and Delete (CRUD). The application manages employee records in a MySQL database using JDBC.
 
