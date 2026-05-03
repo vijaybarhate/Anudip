@@ -14,7 +14,7 @@ public class EmpCRUD {
 	static Scanner sc=new Scanner(System.in);
 
 	public static void main(String[] args) throws SQLException {
-		// TODO Auto-generated method stub
+		
 		while(true) {
 			System.out.println("1. Add Employee");
 			System.out.println("2. View All Employee");
@@ -48,7 +48,7 @@ public class EmpCRUD {
 	}
 
 	private static void deleteEmployee() throws SQLException {
-		// TODO Auto-generated method stub
+		
 		Connection con = DriverManager.getConnection(url, uname, pass);
 		System.out.println("Enter the id of employee: ");
 		int id = sc.nextInt();
@@ -65,7 +65,7 @@ public class EmpCRUD {
 	}
 
 	private static void updateEmployee() throws SQLException {
-		// TODO Auto-generated method stub
+		
 		Connection con = DriverManager.getConnection(url, uname, pass);
 		System.out.println("Enter the employee id to update: ");
 		int id = sc.nextInt();
@@ -94,7 +94,7 @@ public class EmpCRUD {
 	}
 
 	private static void viewEmployee() throws SQLException {
-		// TODO Auto-generated method stub
+		
 		Connection con = DriverManager.getConnection(url, uname, pass);
 		Statement stmt = con.createStatement();
 		String query = "select * from Employee";
@@ -115,7 +115,7 @@ public class EmpCRUD {
 	}
 
 	private static void addEmployee() throws SQLException {
-		// TODO Auto-generated method stub
+		
 		sc.nextLine();
 		System.out.println("Enter name:");
 		String name = sc.nextLine();
