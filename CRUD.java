@@ -1,145 +1,131 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Scanner;
 
-public class EmpCRUD {
-	
-	static final String url="jdbc:mysql://localhost:3306/company";
-	static final String uname="root";
-    static final String pass="root";
-	static Scanner sc=new Scanner(System.in);
+public class CRUD {
+    static final String url = "jdbc:mysql://localhost:3306/company";
+    static final String uname = "root";
+    static final String pass = "root";
+    static Scanner sc = new Scanner(System.in);
 
-	public static void main(String[] args) throws SQLException {
-		
-		while(true) {
-			System.out.println("1. Add Employee");
-			System.out.println("2. View All Employee");
-			System.out.println("3. Update Employee");
-			System.out.println("4. Delete Employee");
-			System.out.println("5. Exit");
-			System.out.println("Enter your choice: ");
-			int ch=sc.nextInt();
-		
-			switch(ch) {
-			case 1:
-				addEmployee();
-				break;
-			case 2:
-				viewEmployee();
-				break;
-			case 3:
-				updateEmployee();
-				break;
-			case 4:
-				deleteEmployee();
-				break;
-			default:
-				System.out.println("Invalid Input!");
-				
-			
-			}
-		}
-			
-		
-	}
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("\n1. Add Employee");
+            System.out.println("2. View All Employee");
+            System.out.println("3. Update Employee");
+            System.out.println("4. Delete Employee");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            
+            if (!sc.hasNextInt()) {
+                System.out.println("Invalid input! Please enter a number.");
+                sc.next();
+                continue;
+            }
+            
+            int ch = sc.nextInt();
 
-	private static void deleteEmployee() throws SQLException {
-		
-		Connection con = DriverManager.getConnection(url, uname, pass);
-		System.out.println("Enter the id of employee: ");
-		int id = sc.nextInt();
-		String sql = "delete from employee where eid = ?";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, id);
-		int rows = ps.executeUpdate();
-		if(rows >0) {
-			System.out.println("Data deleted!");
-		}
-		else {
-			System.out.println("Failed!");
-		}
-	}
+            try {
+                switch (ch) {
+                    case 1:
+                        addEmployee();
+                        break;
+                    case 2:
+                        viewEmployee();
+                        break;
+                    case 3:
+                        updateEmployee();
+                        break;
+                    case 4:
+                        deleteEmployee();
+                        break;
+                    case 5:
+                        System.out.println("Exiting...");
+                        System.exit(0);
+                    default:
+                        System.out.println("Invalid Input!");
+                }
+            } catch (SQLException e) {
+                System.err.println("Database error: " + e.getMessage());
+            }
+        }
+    }
 
-	private static void updateEmployee() throws SQLException {
-		
-		Connection con = DriverManager.getConnection(url, uname, pass);
-		System.out.println("Enter the employee id to update: ");
-		int id = sc.nextInt();
-		sc.nextLine();
-		System.out.println("Enter updated name ");
-		String name = sc.nextLine();
-		System.out.println("Enter udpated department: ");
-		String dept = sc.nextLine();
-		System.out.println("Enter updated salary");
-		int sal = sc.nextInt();
-		
-		String sql = "update employee set name = ?, dept = ?, sal = ? where eid = ?";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, name);
-		ps.setString(2, dept);
-		ps.setInt(3, sal);
-		ps.setInt(4, id);
-		int rows = ps.executeUpdate();
-		if(rows >0) {
-			System.out.println("Data Updated!");
-		}
-		else {
-			System.out.println("Failed!");
-		}
-		
-	}
+    private static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(url, uname, pass);
+    }
 
-	private static void viewEmployee() throws SQLException {
-		
-		Connection con = DriverManager.getConnection(url, uname, pass);
-		Statement stmt = con.createStatement();
-		String query = "select * from Employee";
-		ResultSet rs =  stmt.executeQuery(query);
-		while(rs.next()) {
-			int id = rs.getInt("eid");
-			String name = rs.getString("name");
-			String dept = rs.getString("dept");
-			double sal = rs.getDouble("sal");
-			
-			System.out.println("ID: "+id);
-			System.out.println("NAME: "+name);
-			System.out.println("DEPTARTMENT: "+dept);
-			System.out.println("SALARY: "+sal);
-		}
-			
-			
-	}
+    private static void deleteEmployee() throws SQLException {
+        System.out.print("Enter the id of employee to delete: ");
+        int id = sc.nextInt();
+        String sql = "DELETE FROM Employee WHERE eid = ?";
+        
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            int rows = ps.executeUpdate();
+            System.out.println(rows > 0 ? "Data deleted!" : "Record not found!");
+        }
+    }
 
-	private static void addEmployee() throws SQLException {
-		
-		sc.nextLine();
-		System.out.println("Enter name:");
-		String name = sc.nextLine();
-		System.out.println("Enter department:");
-		String dept = sc.nextLine();
-		System.out.println("Enter salary:");
-		double sal = sc.nextDouble();
-		
-		String sql = "insert into Employee(name, dept, sal)"+"values(?,?,?)";
-		Connection con = DriverManager.getConnection(url,uname,pass);
-		
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, name);
-		ps.setString(2, dept);
-		ps.setDouble(3, sal);
-		
-		int rows = ps.executeUpdate();
-		if(rows >0) {
-			System.out.println("Data added!");
-		}
-		else {
-			System.out.println("Failed!");
-		}
-		
-	}
+    private static void updateEmployee() throws SQLException {
+        System.out.print("Enter the employee id to update: ");
+        int id = sc.nextInt();
+        sc.nextLine(); // consume newline
+        
+        System.out.print("Enter updated name: ");
+        String name = sc.nextLine();
+        System.out.print("Enter updated department: ");
+        String dept = sc.nextLine();
+        System.out.print("Enter updated salary: ");
+        double sal = sc.nextDouble();
+        
+        String sql = "UPDATE Employee SET name = ?, dept = ?, sal = ? WHERE eid = ?";
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, name);
+            ps.setString(2, dept);
+            ps.setDouble(3, sal);
+            ps.setInt(4, id);
+            int rows = ps.executeUpdate();
+            System.out.println(rows > 0 ? "Data Updated!" : "Record not found!");
+        }
+    }
 
+    private static void viewEmployee() throws SQLException {
+        String query = "SELECT * FROM Employee";
+        try (Connection con = getConnection();
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            
+            boolean found = false;
+            while (rs.next()) {
+                found = true;
+                System.out.printf("ID: %d | Name: %s | Dept: %s | Salary: %.2f%n",
+                        rs.getInt("eid"), rs.getString("name"), 
+                        rs.getString("dept"), rs.getDouble("sal"));
+            }
+            if (!found) System.out.println("No records found.");
+        }
+    }
+
+    private static void addEmployee() throws SQLException {
+        sc.nextLine(); // consume newline
+        System.out.print("Enter name: ");
+        String name = sc.nextLine();
+        System.out.print("Enter department: ");
+        String dept = sc.nextLine();
+        System.out.print("Enter salary: ");
+        double sal = sc.nextDouble();
+        
+        String sql = "INSERT INTO Employee(name, dept, sal) VALUES(?,?,?)";
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, name);
+            ps.setString(2, dept);
+            ps.setDouble(3, sal);
+            
+            int rows = ps.executeUpdate();
+            System.out.println(rows > 0 ? "Data added!" : "Failed to add data.");
+        }
+    }
 }
