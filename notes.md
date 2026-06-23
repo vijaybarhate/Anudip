@@ -49,6 +49,36 @@ Array vs ArrayList:
   [] syntax               |  methods like add(), get()
   faster                  |  slightly slower due to overhead
 
+LinkedList (implements List and Deque)
+- doubly linked list — each element holds a reference to the previous and next node
+- fast insert/delete at both ends (O(1))
+- slow random access (O(n)) — must traverse from head/tail
+- can be used as a List, Stack, or Queue
+
+LinkedList as a Stack (LIFO — Browser History):
+  push(element)   — adds element at the front
+  pop()           — removes and returns the first element
+  peek()          — returns the first element without removing
+  add(element)    — appends at the end
+  removeLast()    — removes the last element (simulates "Back")
+  getLast()       — retrieves the last element (current page)
+
+LinkedList as a Queue (FIFO — Waiting List):
+  addLast(element)   — enqueues element at the tail
+  removeFirst()      — dequeues element from the head
+  peekFirst()        — views head without removing
+  isEmpty()          — checks if queue is empty
+  size()             — returns number of elements
+
+Common LinkedList methods:
+  addFirst(element)  — inserts at the beginning
+  addLast(element)   — inserts at the end
+  removeFirst()      — removes and returns the first element
+  removeLast()       — removes and returns the last element
+  getFirst()         — retrieves the first element
+  getLast()          — retrieves the last element
+  remove(element)    — removes the first occurrence of the specified element
+
 Wrapper Classes (for using primitives in collections):
   int    → Integer
   float  → Float
