@@ -155,6 +155,11 @@ public class Menu_Driven_Application {
         } catch (Exception e) {
             // Catch any error (e.g., connection failure, missing driver, wrong SQL)
             System.out.println(e);
+        } finally {
+            // Ensure the Scanner is always closed to prevent resource leak
+            if (sc != null) {
+                sc.close();
+            }
         }
     }
 }
