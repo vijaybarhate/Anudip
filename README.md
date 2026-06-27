@@ -4,7 +4,7 @@ Java practice programs covering **Core Java**, **Collections**, **JDBC**, and **
 
 ## Programs
 
-### Core Java & Arrays
+### Core Java (`core/`)
 | Program | Description |
 |---------|-------------|
 | `Average.java` | Calculate average of 4 numbers |
@@ -12,13 +12,17 @@ Java practice programs covering **Core Java**, **Collections**, **JDBC**, and **
 | `Reverse_Array.java` | Print array in reverse order |
 | `Static_Array.java` | Display hardcoded array elements |
 | `Dynamic_Array.java` | Accept and display array from user input |
+| `bubble_sort_ASC.java` | Bubble sort implementation |
+
+### Array Lab Programs (`arrays/`)
+| Program | Description |
+|---------|-------------|
 | `Array_Average.java` | User-defined array size + average |
 | `Array_MaxElement.java` | Find maximum element from user input |
 | `Array_SecondLargestThirdMin.java` | Sort array → second largest & third minimum |
 | `Array_RemoveDuplicates.java` | Remove duplicates using ArrayList |
-| `bubble_sort_ASC.java` | Bubble sort implementation |
 
-### Collections (ArrayList & LinkedList)
+### Collections (`collections/`)
 | Program | Description |
 |---------|-------------|
 | `Array_List1.java` | ArrayList with hardcoded employee names |
@@ -28,11 +32,11 @@ Java practice programs covering **Core Java**, **Collections**, **JDBC**, and **
 | `BrowserHistory.java` | LinkedList as stack — visit pages, go back |
 | `TrainWaitingList.java` | LinkedList as queue — FIFO passenger waiting list |
 
-### JDBC & Database
+### JDBC & Database (`jdbc/`)
 | Program | Description |
 |---------|-------------|
 | `CRUD.java` | Full CRUD operations on Employee table (`company` DB) |
-| `jdbc/Menu_Driven_Application.java` | Product management menu (`ProductDB` DB) |
+| `Menu_Driven_Application.java` | Product management menu (`ProductDB` DB) |
 
 ## Prerequisites
 
@@ -78,14 +82,24 @@ java FileName
 
 ### Example — Run Shopping Cart:
 ```sh
-javac ShoppingCart.java
-java ShoppingCart
+javac collections/ShoppingCart.java
+java -cp collections ShoppingCart
 ```
 
 ### Example — Run JDBC CRUD:
 ```sh
-javac CRUD.java
-java CRUD
+javac -cp jdbc/mysql-connector-j-8.0.33.jar jdbc/CRUD.java
+java -cp jdbc;mysql-connector-j-8.0.33.jar CRUD
+```
+
+## Folder Structure
+
+```
+core/           — Basic Java programs (arrays, loops, sorting)
+arrays/         — Array lab assignment programs
+collections/    — ArrayList & LinkedList programs
+jdbc/           — JDBC database connectivity programs
+assets/         — Screenshots and flowchart images
 ```
 
 ## Notes

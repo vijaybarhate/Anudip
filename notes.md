@@ -153,7 +153,7 @@ Removing Duplicates:
   for (int x : arr)
       if (!list.contains(x)) list.add(x);
 
-![Array Operations Flowchart](flowchart_array.png)
+![Array Operations Flowchart](assets/flowchart_array.png)
 
 Bubble Sort Algorithm
 - Repeatedly steps through the list, compares adjacent elements, swaps if they are in wrong order
