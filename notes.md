@@ -107,3 +107,61 @@ CRUD operations mapping:
   READ   → SELECT * FROM table
   UPDATE → UPDATE table SET col=? WHERE id=?
   DELETE → DELETE FROM table WHERE id=?
+
+Arrays in Java
+- An array is a container that holds a fixed number of values of a single type
+- Index starts from 0
+- Length is set at creation and cannot be changed
+- Can hold primitives (int, double, etc.) or objects
+
+Declaring an array:
+  int[] arr;           // declaration
+  arr = new int[5];    // allocation (5 slots)
+  int arr[] = {10, 20, 30, 40, 50}; // declaration + initialization
+
+Common array operations:
+  arr.length           — returns the number of elements
+  arr[i]               — access element at index i
+  arr[i] = value       — assign value at index i
+
+Looping through an array:
+  for (int i = 0; i < arr.length; i++) { ... }
+  for (int x : arr) { ... }  // enhanced for-each loop
+
+Finding Maximum:
+  int max = arr[0];
+  for (int i = 1; i < arr.length; i++)
+      if (arr[i] > max) max = arr[i];
+
+Finding Minimum:
+  int min = arr[0];
+  for (int i = 1; i < arr.length; i++)
+      if (arr[i] < min) min = arr[i];
+
+Calculating Average:
+  int sum = 0;
+  for (int x : arr) sum += x;
+  double avg = (double) sum / arr.length;
+
+Second Largest / Third Minimum (after sorting):
+  Arrays.sort(arr);        // sorts in ascending order
+  arr[arr.length - 2]      // second largest
+  arr[2]                   // third minimum (0-indexed)
+
+Removing Duplicates:
+  ArrayList<Integer> list = new ArrayList<>();
+  for (int x : arr)
+      if (!list.contains(x)) list.add(x);
+
+![Array Operations Flowchart](flowchart_array.png)
+
+Bubble Sort Algorithm
+- Repeatedly steps through the list, compares adjacent elements, swaps if they are in wrong order
+- Time complexity: O(n²)
+- Space complexity: O(1)
+
+Steps:
+  for (i = 0; i < n - 1; i++)
+      for (j = 0; j < n - 1 - i; j++)
+          if (a[j] > a[j + 1])
+              swap a[j] and a[j + 1]

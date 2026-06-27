@@ -1,2 +1,11 @@
 *.mp4
 *.class
+*.log
+*.tmp
+.idea/
+.vscode/
+*.vscode/
+.DS_Store
+Thumbs.db
+~$*.docx
+Screenshot*.png

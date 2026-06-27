@@ -1,74 +1,95 @@
 # Anudip
 
-This repository contains a simple command-line interface (CLI) application written in Java that demonstrates fundamental database operations: Create, Read, Update, and Delete (CRUD). The application manages employee records in a MySQL database using JDBC.
+Java practice programs covering **Core Java**, **Collections**, **JDBC**, and **Array operations**.
 
-## Features
+## Programs
 
-*   **Add Employee:** Insert a new employee record with name, department, and salary.
-*   **View Employees:** Retrieve and display all employee records from the database.
-*   **Update Employee:** Modify the details of an existing employee based on their ID.
-*   **Delete Employee:** Remove an employee record from the database using their ID.
+### Core Java & Arrays
+| Program | Description |
+|---------|-------------|
+| `Average.java` | Calculate average of 4 numbers |
+| `Min_Max.java` | Find min and max from array |
+| `Reverse_Array.java` | Print array in reverse order |
+| `Static_Array.java` | Display hardcoded array elements |
+| `Dynamic_Array.java` | Accept and display array from user input |
+| `Array_Average.java` | User-defined array size + average |
+| `Array_MaxElement.java` | Find maximum element from user input |
+| `Array_SecondLargestThirdMin.java` | Sort array → second largest & third minimum |
+| `Array_RemoveDuplicates.java` | Remove duplicates using ArrayList |
+| `bubble_sort_ASC.java` | Bubble sort implementation |
+
+### Collections (ArrayList & LinkedList)
+| Program | Description |
+|---------|-------------|
+| `Array_List1.java` | ArrayList with hardcoded employee names |
+| `Array_List2.java` | ArrayList with user-defined size and loop input |
+| `ShoppingCart.java` | Menu-driven cart — add, remove, view, checkout |
+| `PlaylistManager.java` | Menu-driven playlist — add, remove, view songs |
+| `BrowserHistory.java` | LinkedList as stack — visit pages, go back |
+| `TrainWaitingList.java` | LinkedList as queue — FIFO passenger waiting list |
+
+### JDBC & Database
+| Program | Description |
+|---------|-------------|
+| `CRUD.java` | Full CRUD operations on Employee table (`company` DB) |
+| `jdbc/Menu_Driven_Application.java` | Product management menu (`ProductDB` DB) |
 
 ## Prerequisites
 
-*   Java Development Kit (JDK)
-*   A running instance of MySQL Server.
-*   MySQL JDBC Driver.
+- Java Development Kit (JDK) 8+
+- MySQL Server (for JDBC programs)
+- MySQL JDBC Driver (`mysql-connector-j-8.0.33.jar` included in `jdbc/`)
 
-## Setup
+## Setup for JDBC Programs
 
-1.  **Database and Table Creation**
+1. Create the database and table:
 
-    Before running the application, you need to set up the database and table. Connect to your MySQL server and execute the following SQL commands:
+   ```sql
+   -- For CRUD.java
+   CREATE DATABASE company;
+   USE company;
+   CREATE TABLE employee (
+       eid INT AUTO_INCREMENT PRIMARY KEY,
+       name VARCHAR(255) NOT NULL,
+       dept VARCHAR(100),
+       sal DOUBLE
+   );
 
-    ```sql
-    -- Create the database
-    CREATE DATABASE company;
+   -- For Menu_Driven_Application.java
+   CREATE DATABASE ProductDB;
+   USE ProductDB;
+   CREATE TABLE ProductInfo (
+       pid INT PRIMARY KEY,
+       pname VARCHAR(100),
+       price DOUBLE,
+       quantity INT
+   );
+   ```
 
-    -- Switch to the new database
-    USE company;
-
-    -- Create the employee table
-    CREATE TABLE employee (
-        eid INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
-        dept VARCHAR(100),
-        sal DOUBLE
-    );
-    ```
-
-2.  **Database Configuration**
-
-    The database connection details (URL, username, and password) are hardcoded in `CRUD.java`. Open the file and modify these values if they differ from your local MySQL setup.
-
-    ```java
-    static final String url="jdbc:mysql://localhost:3306/company";
-    static final String uname="root";
-    static final String pass="root";
-    ```
+2. Update database credentials in the respective `.java` files if your MySQL user/password differ.
 
 ## How to Run
 
-1.  Clone the repository or download the `CRUD.java` file.
+### For any Java program:
+```sh
+javac FileName.java
+java FileName
+```
 
-2.  Open a terminal or command prompt and navigate to the directory containing the file.
+### Example — Run Shopping Cart:
+```sh
+javac ShoppingCart.java
+java ShoppingCart
+```
 
-3.  Compile the Java source code:
-    ```sh
-    javac CRUD.java
-    ```
+### Example — Run JDBC CRUD:
+```sh
+javac CRUD.java
+java CRUD
+```
 
-4.  Run the compiled application. Note that the class name is `EmpCRUD`.
-    ```sh
-    java EmpCRUD
-    ```
+## Notes
 
-5.  The application will present a menu. Follow the on-screen prompts to perform CRUD operations.
-
-    ```
-    1. Add Employee
-    2. View All Employee
-    3. Update Employee
-    4. Delete Employee
-    5. Exit
-    Enter your choice:
+- All `.class` files are gitignored
+- Lab documents (`.docx`) include actual terminal screenshots of program runs
+- See `notes.md` for collection framework reference, hierarchy, array operations, and JDBC notes
